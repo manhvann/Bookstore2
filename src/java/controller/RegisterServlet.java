@@ -43,6 +43,7 @@ public class RegisterServlet extends HttpServlet {
 
         Admin admin = new Admin(username, password, role);
 
+        
         boolean success = dao.saveAdmin(admin);
 
         if (success) {
