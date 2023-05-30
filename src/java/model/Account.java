@@ -8,14 +8,14 @@ package model;
  *
  * @author Van Manh
  */
-public class Admin {
+public class Account {
     private String username,password;
     private int role;
 
-    public Admin() {
+    public Account() {
     }
 
-    public Admin(String username, String password, int role) {
+    public Account(String username, String password, int role) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -33,7 +33,7 @@ public class Admin {
         return role;
     }
 
-    public void setUsernamse(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 

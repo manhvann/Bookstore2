@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : May 27, 2023, 7:02:14 PM
+    Author     : Van Manh
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +32,7 @@
         <div class="content">
           <div class="header">Books</div>
           <div class="link">
-            <a href="../index.html">Admin</a>
+            <a href="../index.jsp">Admin</a>
             / Books
           </div>
         </div>
@@ -68,7 +75,7 @@
                   </div>
                 </li>
                 <div class="sign-out">
-                  <a class="btn" href="../../index.html">
+                  <a class="btn" href="../../index.jsp">
                     Đăng xuất
                     <i class="fas fa-sign-out-alt"></i>
                   </a>
@@ -101,7 +108,7 @@
           </div>
           <ul class="sub-nav hide">
             <li class="sub-nav-content">
-              <a href="../../index.html" class="sub-nav-items">
+              <a href="../../index.jsp" class="sub-nav-items">
                 <div class="sub-nav-t">
                   <i class="fas fa-home"></i>
                   Trang chủ
@@ -149,7 +156,7 @@
           </div>
           <ul class="sub-nav">
             <li class="sub-nav-content">
-              <a href="../index.html" class="sub-nav-items">
+              <a href="../index.jsp" class="sub-nav-items">
                 <div class="sub-nav-t">
                   <i class="fas fa-home"></i>
                   Dashboard
@@ -157,7 +164,7 @@
               </a>
             </li>
             <li class="sub-nav-content">
-              <a href="./index.html" class="sub-nav-items color">
+              <a href="./index.jsp" class="sub-nav-items color">
                 <div class="sub-nav-t">
                   <i class="fas fa-book"></i>
                   Books

@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Admin;
+import model.Account;
 
 /**
  *
@@ -74,18 +74,20 @@ public class LoginServlet extends HttpServlet {
         String u=request.getParameter("user");
         String p=request.getParameter("pass");
         DAO d=new DAO();
-        Admin a=d.check(u,p);
+        Account a=d.check(u,p);
         HttpSession session=request.getSession();
         if(a==null){
             //Chua co tai khoan
+               request.setAttribute("isLogin", 0);
             request.setAttribute("error", "Tên đăng nhập hoặc mật khẩu sai!!");
             request.getRequestDispatcher("index.jsp").forward(request, response);
-            
         }
         else{
             //Co tim thay
             //Tao session
             session.setAttribute("account", a);
+                request.setAttribute("isLogin",1);
+                request.setAttribute("success", "Đăng nhập thành công!");
             //role=1 sang trang admin
             if(a.getRole()==1){
                request.getRequestDispatcher("./admin").forward(request, response); 
@@ -95,7 +97,6 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("account", a);
                 session.setAttribute("check",1);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-                
             }
             
             

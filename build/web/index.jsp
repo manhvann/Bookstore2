@@ -32,8 +32,6 @@
         <div class="welcome">
             <div class="welcome-container flex pl-8">
                 <p class="welcome-left">Chào mừng bạn đến với nhà sách Tiến Thọ</p>
-                <c:set var="resultLogin" value="0"/>
-
                 <div class="welcome-log ">
                     <a class="bg-red signup" href="#"> Đăng ký </a>
                     | <a class="login" href="#">Đăng nhập</a>
@@ -95,7 +93,7 @@
                 <div class="notification">
                     <div class="notification-message">
                         Giỏ hàng của bạn đang trống
-                        <a class="red" href="../index.html">Tiếp tục mua hàng</a>
+                        <a class="red" href="../index.jsp">Tiếp tục mua hàng</a>
                     </div>
                 </div>
             </div>
@@ -116,7 +114,7 @@
                     </a>
                 </li>
                 <li class="nav-right">
-                    <a href="login" class="nav-right-container">
+                    <a href="index.jsp" class="nav-right-container">
                         <p class="nav-text">Trang chủ</p>
                     </a>
                 </li>
@@ -128,7 +126,7 @@
                         </div>
                         <div class="sub-nav">
                             <div class="introduce">
-                                <a href="./introduction" class="introduce-item">
+                                <a href="./introduction/index.jsp" class="introduce-item">
                                     <div class="sub-nav-content">Giới thiệu chung</div>
                                 </a>
                             </div>
@@ -141,7 +139,7 @@
                     </div>
                 </li>
                 <li class="nav-right">
-                    <a href="./contact" class="nav-right-container">
+                    <a href="./contact/index1.jsp" class="nav-right-container">
                         <p class="nav-text">Liên hệ</p>
                     </a>
                 </li>
@@ -1073,7 +1071,7 @@
                     <div class="footer-container-left">
                         <div class="container">
                             <div class="container-h">Sản phẩm</div>
-                            <a href="../index.html" class="container-items">Trang chủ</a>
+                            <a href="../index.jsp" class="container-items">Trang chủ</a>
                             <a href="../introduction/" class="container-items">Giới thiệu</a>
                             <a href="../contact/" class="container-items">Liên hệ</a>
                         </div>
@@ -1166,12 +1164,27 @@
                                                     <a class="auth-form__miss-t">Quên mật khẩu?</a>
                                                 </div>
                                             </div>
-                                            <h3 style="color: white">${requestScope.error}</h3>  
+                                            
                                             <div class="auth-form__controls">
                                                 <input type="submit" class="btn" value="Ðăng nhập"> 
                                             </div>
                                         </div>
                                     </div>
+                                    <script>
+                                       const isLogin = check => {
+                                            if (check === 0)
+                                            {
+                                              alert("${requestScope.error}");
+                                              console.log("err");
+                                            }
+                                            
+                                            else if (check === 1) {
+                                              alert("${requestScope.success}");
+                                              console.log("success");
+                                            }
+                                       };
+                                       isLogin(${requestScope.isLogin});
+                                    </script>
                                 </form>
 
                                 <form action="register" method="post">
@@ -1221,12 +1234,33 @@
                                                     </a>
                                                 </p>
                                             </div>
-                                            <h3 style="color: white">${requestScope.errorRegister}</h3>  
+                                             
                                             <div class="auth-form__controls">
                                                 <button class="btn">Đăng ký</button>
                                             </div>
                                         </div>
                                     </div>
+                                            
+                                    <script>
+                                       const isRegister = check => {
+                                            if (check === 0)
+                                            {
+                                              alert("${requestScope.error}");
+                                              console.log("err");
+                                            }
+                                            
+                                            else if (check === 1) {
+                                              alert("${requestScope.success}");
+                                              console.log("success");
+                                            }
+                                            else if (check === 2){
+                                                alert("${requestScope.error1}");
+                                                console.log("err1");
+                                            }
+                                            
+                                       };
+                                       isRegister(${requestScope.isRegister});
+                                    </script>
                                 </form>
 
 
@@ -1250,7 +1284,7 @@
                 </div>
             </div>
         </div>
-
+                                                                   
         <script src="./main.js"></script>
     </body>
 </html>

@@ -5,7 +5,7 @@
 package dal;
 
 import java.sql.Connection;
-import model.Admin;
+import model.Account;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,36 +22,56 @@ public class DAO extends DBContext {
         db = new DBContext();
     }
 
-    public boolean saveAdmin(Admin admin) {
-        String sql = "INSERT INTO Admin (username, password, role) VALUES (?, ?, ?)";
-        try ( Connection con = db.getConnection();  PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setString(1, admin.getUsername());
-            stmt.setString(2, admin.getPassword());
-            stmt.setInt(3, admin.getRole());
+    public boolean saveAccount(Account account) {
+        String checkSql = "SELECT COUNT(*) FROM Account WHERE username = ?";
+    String insertSql = "INSERT INTO Account (username, password, role) VALUES (?, ?, ?)";
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+    try (Connection con = db.getConnection();
+         PreparedStatement checkStmt = con.prepareStatement(checkSql);
+         PreparedStatement insertStmt = con.prepareStatement(insertSql)) {
+
+        // Kiểm tra sự tồn tại của tài khoản
+        checkStmt.setString(1, account.getUsername());
+        try (ResultSet resultSet = checkStmt.executeQuery()) {
+            if (resultSet.next() && resultSet.getInt(1) > 0) {
+                // Tài khoản đã tồn tại
+                return false;
+            }
         }
-        return false;
+
+        // Thêm tài khoản mới
+        insertStmt.setString(1, account.getUsername());
+        insertStmt.setString(2, account.getPassword());
+        insertStmt.setInt(3, account.getRole());
+
+        int rowsAffected = insertStmt.executeUpdate();
+        return rowsAffected > 0;
+    } catch (SQLException e) {
+        // Xử lý ngoại lệ
+        e.printStackTrace();
+    }
+    return false;
     }
 
-    public Admin check(String username, String password) {
-        String sql = "select * from Admin where username=? and password=?";
+    public Account check(String username, String password) {
+        String sql = "select * from Account where username=? and password=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                Admin a = new Admin(rs.getString("Username"), rs.getString("password"), rs.getInt("role"));
+                Account a = new Account(rs.getString("Username"), rs.getString("password"), rs.getInt("role"));
                 return a;
             }
         } catch (SQLException e) {
 
         }
         return null;
+    }
+
+    public void close() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

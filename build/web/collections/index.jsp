@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : May 27, 2023, 6:40:36 PM
+    Author     : Van Manh
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,19 +29,41 @@
     <!-- begin header -->
    <div id="header">
      <!-- welcome -->
-       <div class="welcome">
-      <div class="welcome-container flex pl-8">
-        <p class="welcome-left">Chào mừng bạn đến với nhà sách Tiến Thọ</p>
-        <div class="welcome-log ">
-          <a class="bg-red signup" href="#"> Đăng ký </a>
-          | <a class="login" href="#">Đăng nhập</a>
+        <div class="welcome">
+            <div class="welcome-container flex pl-8">
+                <p class="welcome-left">Chào mừng bạn đến với nhà sách Tiến Thọ</p>
+                <div class="welcome-log ">
+                    <a class="bg-red signup" href="#"> Đăng ký </a>
+                    | <a class="login" href="#">Đăng nhập</a>
+                </div>
+
+                <div class="welcome-login hide">
+                    <a href="">Xin chào: ${sessionScope.account.getUsername()}</a>
+                    | <a href="/bookstore1/logout">Đăng xuất</a>
+                </div>
+
+
+                <script>
+                    function updateWelcomeClasses(check) {
+                        var welcomeLogin = document.querySelector('.welcome-login');
+                        var welcomeLog = document.querySelector('.welcome-log');
+
+                        if (check === 1) {
+                            welcomeLog.classList.add('hide');
+                            welcomeLogin.classList.remove('hide');
+                        } else {
+                            welcomeLog.classList.remove('hide');
+                            welcomeLogin.classList.add('hide');
+                        }
+                    }
+
+                    // Sử dụng hàm updateWelcomeClasses và truyền giá trị cho biến check
+                    updateWelcomeClasses(${sessionScope.check}); // Nếu check = 1, thêm "hide" vào class "welcome-log" và bỏ "hide" ở class "welcome-login hide"
+                    //            updateWelcomeClasses(0); // Nếu check khác 1, bỏ "hide" ở class "welcome-log" và thêm "hide" vào class "welcome-login hide"
+                </script>
+            </div>
         </div>
-        <div class="welcome-login hide">
-          <a href="">Xin chào: User</a>
-          | <a href="">Đăng xuất</a>
-        </div>
-      </div>
-    </div>
+
 
     <!-- toolbar -->
     <div class="header-container">
@@ -65,7 +94,7 @@
         <div class="notification">
           <div class="notification-message">
             Giỏ hàng của bạn đang trống
-            <a class="red" href="../index.html">Tiếp tục mua hàng</a>
+            <a class="red" href="../index.jsp">Tiếp tục mua hàng</a>
           </div>
         </div>
       </div>
@@ -86,7 +115,7 @@
           </a>
         </li>
         <li class="nav-right">
-          <a href="../index.html" class="nav-right-container">
+          <a href="../index.jsp" class="nav-right-container">
             <p class="nav-text">Trang chủ</p>
           </a>
         </li>
@@ -126,8 +155,8 @@
    <div class="collections">
     <div class="header">
       <div class="link-a">
-        <a href="../index.html" class="header-link link">Trang chủ </a>/
-          <a href="./index.html" class="header-link link"> Sách Khoa Học </a>/
+        <a href="../index.jsp" class="header-link link">Trang chủ </a>/
+          <a href="./index.jsp" class="header-link link"> Sách Khoa Học </a>/
           <p class="header-link">Khoa học Thiếu nhi</p>
       </div>
     </div>
@@ -136,30 +165,30 @@
         <div class="left-menu">
           <p class="menu-header">Danh mục</p>
           <li class="menu-items">
-            <a href="../index.html">Trang chủ</a>
+            <a href="../index.jsp">Trang chủ</a>
           </li>
           <li class="menu-items">
-            <a href="../index.html">Nhà sách Tiến Thọ</a>
+            <a href="../index.jsp">Nhà sách Tiến Thọ</a>
             <i class="fas fa-chevron-down icon down-icon"></i>
 
           </li>
           <li class="menu-items sub-menu">
-            <a href="./index.html">Thiếu nhi</a>
+            <a href="./index.jsp">Thiếu nhi</a>
           </li>
           <li class="menu-items sub-menu">
-            <a href="./index.html">Văn học</a>
+            <a href="./index.jsp">Văn học</a>
           </li>
           <li class="menu-items sub-menu">
-            <a href="./index.html">Tâm lý đời sống</a>
+            <a href="./index.jsp">Tâm lý đời sống</a>
           </li>
           <li class="menu-items sub-menu">
-            <a href="./index.html">Khoa học</a>
+            <a href="./index.jsp">Khoa học</a>
           </li>
           <li class="menu-items sub-menu">
-            <a href="./index.html">Chính trị lịch sử</a>
+            <a href="./index.jsp">Chính trị lịch sử</a>
           </li>
           <li class="menu-items sub-menu">
-            <a href="./index.html">Tham khảo</a>
+            <a href="./index.jsp">Tham khảo</a>
           </li>
           <li class="menu-items">
             <a href="../introduction/">Giới thiệu</a>
@@ -483,7 +512,7 @@
           <div class="footer-container-left">
             <div class="container">
               <div class="container-h">Sản phẩm</div>
-              <a href="../index.html" class="container-items">Trang chủ</a>
+              <a href="../index.jsp" class="container-items">Trang chủ</a>
               <a href="../introduction/" class="container-items">Giới thiệu</a>
               <a href="../contact/" class="container-items">Liên hệ</a>
             </div>
@@ -530,119 +559,168 @@
     </div>
 
     <!-- modal -->
-    <div class="form-wrapper hide">
-      <div class="modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-body">
-          <div class="modal-inner">
-            <!-- authen form --> 
-            <div class="auth-form">
-              <div class="out">
-                <i class="fas fa-times"></i>
-                <!-- <AiOutlineClose /> -->
-              </div>
-              <div class="auth-form__container">
-                <div class="sign-in type">
-                  <div class="auth-form__header">
-                    <h3 class="auth-form__heading">Đăng nhập</h3>
-                    <span class="auth-form__switch-btn">Đăng ký</span>
-                  </div>
-    
-                  <div class="auth-form__content">
-                    <div class="auth-form__form">
-                      <div class="auth-form__group">
-                        <input
-                          type="text"
-                          class="auth-form__input"
-                          placeholder="Tên đăng nhập"
-                        />
-                      </div>
-                      <div class="auth-form__group">
-                        <input
-                          type="password"
-                          class="auth-form__input"
-                          placeholder="Mật khẩu"
-                        />
-                      </div>
-                      <div class="auth-form__miss">
-                        <a class="auth-form__miss-t">Quên mật khẩu?</a>
-                      </div>
-                    </div>
-    
-                    <div class="auth-form__controls">
-                      <button class="btn">Đăng nhập</button>
-                    </div>
-                  </div>
-                </div>
+        <!-- sign in -->
+        <div class="form-wrapper hide">
+            <div class="modal">
+                <div class="modal-overlay"></div>
+                <div class="modal-body">
+                    <div class="modal-inner">
+                        <!-- authen form -->
+                        <div class="auth-form">
+                            <div class="out">
+                                <i class="fas fa-times"></i>
+                                <!-- <AiOutlineClose /> -->
+                            </div>
 
-                <div class="sign-up type">
-                  <div class="auth-form__header">
-                    <h3 class="auth-form__heading">Đăng ký</h3>
-                    <span class="auth-form__switch-btn">Đăng nhập</span>
-                  </div>
-    
-                  <div class="auth-form__content">
-                    <div class="auth-form__form">
-                      <div class="auth-form__group">
-                        <input
-                          type="text"
-                          class="auth-form__input"
-                          placeholder="Tên đăng nhập"
-                        />
-                      </div>
-                      <div class="auth-form__group">
-                        <input
-                          type="password"
-                          class="auth-form__input"
-                          placeholder="Mật khẩu"
-                        />
-                      </div>
-                      <div class="auth-form__group">
-                        <input
-                          type="password"
-                          class="auth-form__input"
-                          placeholder="Nhập lại mật khẩu"
-                        />
-                      </div>
+                            <div class="auth-form__container">
+                                <form action="/bookstore1/login" method="post">
+                                    <div class="sign-in type">
+                                        <div class="auth-form__header">
+                                            <h3 class="auth-form__heading">Đăng nhập</h3>
+                                            <span class="auth-form__switch-btn">Đăng ký</span>
+                                        </div>
+                                        <div class="auth-form__content">
+                                            <div class="auth-form__form">
+                                                <div class="auth-form__group">
+                                                    <input
+                                                        type="text"
+                                                        class="auth-form__input"
+                                                        placeholder="Tên đăng nhập"
+                                                        name="user"
+                                                        />
+                                                </div>
+                                                <div class="auth-form__group">
+                                                    <input
+                                                        type="password"
+                                                        class="auth-form__input"
+                                                        placeholder="Mật khẩu"
+                                                        name="pass"
+                                                        />
+                                                </div>
+                                                <div class="auth-form__miss">
+                                                    <a class="auth-form__miss-t">Quên mật khẩu?</a>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="auth-form__controls">
+                                                <input type="submit" class="btn" value="Ðăng nhập"> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                       const isLogin = check => {
+                                            if (check === 0)
+                                            {
+                                              alert("${requestScope.error}");
+                                              console.log("err");
+                                            }
+                                            
+                                            else if (check === 1) {
+                                              alert("${requestScope.success}");
+                                              console.log("success");
+                                            }
+                                       };
+                                       isLogin(${requestScope.isLogin});
+                                    </script>
+                                </form>
+
+                                <form action="/bookstore1/register" method="post">
+                                    <div class="sign-up type">
+                                        <div class="auth-form__header">
+                                            <h3 class="auth-form__heading">Đăng ký</h3>
+                                            <span class="auth-form__switch-btn">Đăng nhập</span>
+                                        </div>
+
+                                        <div class="auth-form__content">
+                                            <div class="auth-form__form">
+                                                <div class="auth-form__group">
+                                                    <input
+                                                        type="text"
+                                                        class="auth-form__input"
+                                                        placeholder="Tên đăng nhập"
+                                                        name="user"
+                                                        />
+                                                </div>
+                                                <div class="auth-form__group">
+                                                    <input
+                                                        type="password"
+                                                        class="auth-form__input"
+                                                        placeholder="Mật khẩu"
+                                                        name="pass"
+                                                        />
+                                                </div>
+                                                <div class="auth-form__group">
+                                                    <input
+                                                        type="password"
+                                                        class="auth-form__input"
+                                                        placeholder="Nhập lại mật khẩu"
+                                                        name="repass"
+                                                        />
+                                                </div>
+                                            </div>
+
+                                            <div class="auth-form__aside">
+                                                <p class="auth-form__policy-text">
+                                                    Bằng cách đăng ký, bạn đồng ý với
+                                                    <a href="" class="auth-form__policy-link">
+                                                        Điều khoản dịch vụ
+                                                    </a>
+                                                    &
+                                                    <a href="" class="auth-form__policy-link">
+                                                        Chính sách bảo mật của chúng tôi.
+                                                    </a>
+                                                </p>
+                                            </div>
+                                              
+                                            <div class="auth-form__controls">
+                                                <button class="btn">Đăng ký</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                       const isRegister = check => {
+                                            if (check === 0)
+                                            {
+                                              alert("${requestScope.error}");
+                                              console.log("err");
+                                            }
+                                            
+                                            else if (check === 1) {
+                                              alert("${requestScope.success}");
+                                              console.log("success");
+                                            }
+                                            else if (check === 2){
+                                                alert("${requestScope.error1}");
+                                                console.log("err1");
+                                            }
+                                            
+                                       };
+                                       isRegister(${requestScope.isRegister});
+                                    </script>
+                                </form>
+
+
+
+                            </div>
+
+                            <div class="auth-form__socials">
+                                <a href="" class="btn--with-icon facebook-icon">
+                                    <!-- <FaFacebook class="social-icon" /> -->
+                                    <i class="fab fa-facebook social-icon"></i>
+                                    <div>Kết nối với Facebook</div>
+                                </a>
+                                <a href="" class="btn--with-icon">
+                                    <!-- <FaGooglePlus class="social-icon" /> -->
+                                    <i class="fab fa-google-plus social-icon"></i>
+                                    <div>Kết nối với Google</div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-    
-                    <div class="auth-form__aside">
-                      <p class="auth-form__policy-text">
-                        Bằng cách đăng ký, bạn đồng ý với 
-                        <a href="" class="auth-form__policy-link">
-                          Điều khoản dịch vụ
-                        </a>
-                        &
-                        <a href="" class="auth-form__policy-link">
-                          Chính sách bảo mật của chúng tôi.
-                        </a>
-                      </p>
-                    </div>
-    
-                    <div class="auth-form__controls">
-                      <button class="btn">Đăng ký</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
-           
-              <div class="auth-form__socials">
-                <a href="" class="btn--with-icon facebook-icon">
-                  <!-- <FaFacebook class="social-icon" /> -->
-                  <i class="fab fa-facebook social-icon"></i>
-                  <div>Kết nối với Facebook</div>
-                </a>
-                <a href="" class="btn--with-icon">
-                  <!-- <FaGooglePlus class="social-icon" /> -->
-                  <i class="fab fa-google-plus social-icon"></i>
-                  <div>Kết nối với Google</div>
-                </a>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
       <script src="./main.js"></script>
   </body>
 </html>
+
