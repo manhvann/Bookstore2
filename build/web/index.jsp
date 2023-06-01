@@ -6,6 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.List"%>
+<%@page import="model.Book"%>
+<%@page import="dal.BookDAO"%>
+<%@page import="java.text.DecimalFormat" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -355,113 +359,37 @@
                     </div>
                     <div class="book-container">
                         <!-- book1 -->
+                        <%
+                            BookDAO bookDAO = new BookDAO();
+                            List<Book> books = bookDAO.getAllBook();
+                            DecimalFormat f= new DecimalFormat("");
+                            for (int i=0;i<5;i++) {
+                        %>
+
                         <div class="book-link">
                             <div class="book-items" style="border-top: 2px solid #fe580b">
                                 <div class="book-sale-a">
-                                    <div class="book-sale">-20%</div>
+                                    <div class="book-sale">-<%= f.format(books.get(i).getSale()*100) %>%</div>
                                 </div>
                                 <a href="./bookDetail" class="book-img">
                                     <img
-                                        src="./img/book1.webp"
+                                        src="<%= books.get(i).getImg() %>"
                                         alt="mat_ngot_cho_tam_hon_tre_tho"
                                         />
                                 </a>
                                 <a href="./bookDetail" class="book-name-a">
-                                    <div class="book-name">Mật ngọt cho tâm hồn trẻ thơ</div>
+                                    <div class="book-name"><%= books.get(i).getName() %></div>
                                 </a>
                                 <div class="book-price">
-                                    <div class="current-price">128.000đ</div>
-                                    <div class="cost">160.000đ</div>
+                                    <div class="current-price"><%= f.format(books.get(i).getPrice() -books.get(i).getSale()*books.get(i).getPrice()) %>đ</div>
+                                    <div class="cost"><%= f.format(books.get(i).getPrice()) %>đ</div>
                                 </div>
                             </div>
                         </div>
-                        <!-- book2 -->
-                        <div class="book-link">
-                            <div class="book-items" style="border-top: 2px solid #a52a2a">
-                                <div class="book-sale-a">
-                                    <div class="book-sale">-20%</div>
-                                </div>
-                                <a href="./bookDetail" class="book-img">
-                                    <img
-                                        src="./img/book2.webp"
-                                        alt="mat_ngot_cho_tam_hon_thanh thieu nien"
-                                        />
-                                </a>
-                                <a href="./bookDetail" class="book-name-a">
-                                    <div class="book-name">
-                                        Mật ngọt cho tâm hồn thanh thiếu niên
-                                    </div>
-                                </a>
-                                <div class="book-price">
-                                    <div class="current-price">148.000đ</div>
-                                    <div class="cost">185.000đ</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- book 3 -->
-                        <div class="book-link">
-                            <div class="book-items" style="border-top: 2px solid #00aaff">
-                                <div class="book-sale-a">
-                                    <div class="book-sale">-20%</div>
-                                </div>
-                                <a href="./bookDetail" class="book-img">
-                                    <img
-                                        src="./img/book3.webp"
-                                        alt="mat_ngot_cho_tam_hon_phu_nu"
-                                        />
-                                </a>
-                                <a href="./bookDetail" class="book-name-a">
-                                    <div class="book-name">Mật ngọt cho tâm hồn phụ nữ</div>
-                                </a>
-                                <div class="book-price">
-                                    <div class="current-price">108.000đ</div>
-                                    <div class="cost">135.000đ</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- book 4 -->
-                        <div class="book-link">
-                            <div class="book-items" style="border-top: 2px solid #ffc0cb">
-                                <div class="book-sale-a">
-                                    <div class="book-sale">-20%</div>
-                                </div>
-                                <a href="./bookDetail" class="book-img">
-                                    <img src="./img/book4.webp" alt="khong_phai_loi_cua_con" />
-                                </a>
-                                <a href="./bookDetail" class="book-name-a">
-                                    <div class="book-name">
-                                        Giáo dục giới tính - Không phải lỗi của con
-                                    </div>
-                                </a>
-                                <div class="book-price">
-                                    <div class="current-price">40.000đ</div>
-                                    <div class="cost">50.000đ</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- book 5 -->
-                        <div class="book-link">
-                            <div class="book-items" style="border-top: 2px solid green">
-                                <div class="book-sale-a">
-                                    <div class="book-sale">-20%</div>
-                                </div>
-                                <a href="./bookDetail" class="book-img">
-                                    <img
-                                        src="./img/book5.webp"
-                                        alt="cha_me_lam_gi_tao_hung_thu_cho_con"
-                                        />
-                                </a>
-                                <a href="./bookDetail" class="book-name-a">
-                                    <div class="book-name">
-                                        Cha mẹ làm gì để tạo hứng thú cho con?
-                                    </div>
-                                </a>
-                                <div class="book-price">
-                                    <div class="current-price">60.000đ</div>
-                                    <div class="cost">75.000đ</div>
-                                </div>
-                            </div>
-                        </div>
+
+                        <%
+                                }
+                        %>
                     </div>
                 </div>
             </div>
@@ -479,178 +407,33 @@
                         </div>
                         <div class="book-book">
                             <!-- book1 -->
+                            <%
+                            for (int i=0;i<8;i++) {
+                            %>
                             <div class="book-link">
                                 <div class="book-items">
                                     <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
+                                        <div class="book-sale">-<%= f.format(books.get(i).getSale()*100) %>%</div>
                                     </div>
                                     <a href="./bookDetail" class="book-img">
                                         <img
-                                            src="./img/book1.webp"
+                                            src="<%= books.get(i).getImg() %>"
                                             alt="mat_ngot_cho_tam_hon_tre_tho"
                                             />
                                     </a>
                                     <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn trẻ thơ</div>
+                                        <div class="book-name"><%= books.get(i).getName() %></div>
                                     </a>
                                     <div class="book-price">
-                                        <div class="current-price">128.000đ</div>
-                                        <div class="cost">160.000đ</div>
+                                        <div class="current-price"><%= f.format(books.get(i).getPrice() -books.get(i).getSale()*books.get(i).getPrice()) %>đ</div>
+                                        <div class="cost"><%= f.format(books.get(i).getPrice()) %>đ</div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- book2 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book2.webp"
-                                            alt="mat_ngot_cho_tam_hon_thanh thieu nien"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Mật ngọt cho tâm hồn thanh thiếu niên
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">148.000đ</div>
-                                        <div class="cost">185.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 3 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book3.webp"
-                                            alt="mat_ngot_cho_tam_hon_phu_nu"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn phụ nữ</div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">108.000đ</div>
-                                        <div class="cost">135.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 4 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img src="./img/book4.webp" alt="khong_phai_loi_cua_con" />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Giáo dục giới tính - Không phải lỗi của con
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">40.000đ</div>
-                                        <div class="cost">50.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 5 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book5.webp"
-                                            alt="cha_me_lam_gi_tao_hung_thu_cho_con"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Cha mẹ làm gì để tạo hứng thú cho con?
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">60.000đ</div>
-                                        <div class="cost">75.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 6 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book1.webp"
-                                            alt="mat_ngot_cho_tam_hon_tre_tho"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn trẻ thơ</div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">128.000đ</div>
-                                        <div class="cost">160.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 7 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book2.webp"
-                                            alt="mat_ngot_cho_tam_hon_thanh thieu nien"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Mật ngọt cho tâm hồn thanh thiếu niên
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">148.000đ</div>
-                                        <div class="cost">185.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 8 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book3.webp"
-                                            alt="mat_ngot_cho_tam_hon_phu_nu"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn phụ nữ</div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">108.000đ</div>
-                                        <div class="cost">135.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <%
+                        }
+                            %>
+
                         </div>
                     </div>
                 </div>
@@ -669,178 +452,32 @@
                         </div>
                         <div class="book-book">
                             <!-- book1 -->
+                            <%
+                            for (int i=0;i<8;i++) {
+                            %>
                             <div class="book-link">
                                 <div class="book-items">
                                     <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
+                                        <div class="book-sale">-<%= f.format(books.get(i).getSale()*100) %>%</div>
                                     </div>
                                     <a href="./bookDetail" class="book-img">
                                         <img
-                                            src="./img/book1.webp"
+                                            src="<%= books.get(i).getImg() %>"
                                             alt="mat_ngot_cho_tam_hon_tre_tho"
                                             />
                                     </a>
                                     <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn trẻ thơ</div>
+                                        <div class="book-name"><%= books.get(i).getName() %></div>
                                     </a>
                                     <div class="book-price">
-                                        <div class="current-price">128.000đ</div>
-                                        <div class="cost">160.000đ</div>
+                                        <div class="current-price"><%= f.format(books.get(i).getPrice() -books.get(i).getSale()*books.get(i).getPrice()) %>đ</div>
+                                        <div class="cost"><%= f.format(books.get(i).getPrice()) %>đ</div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- book2 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book2.webp"
-                                            alt="mat_ngot_cho_tam_hon_thanh thieu nien"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Mật ngọt cho tâm hồn thanh thiếu niên
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">148.000đ</div>
-                                        <div class="cost">185.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 3 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book3.webp"
-                                            alt="mat_ngot_cho_tam_hon_phu_nu"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn phụ nữ</div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">108.000đ</div>
-                                        <div class="cost">135.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 4 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img src="./img/book4.webp" alt="khong_phai_loi_cua_con" />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Giáo dục giới tính - Không phải lỗi của con
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">40.000đ</div>
-                                        <div class="cost">50.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 5 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book5.webp"
-                                            alt="cha_me_lam_gi_tao_hung_thu_cho_con"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Cha mẹ làm gì để tạo hứng thú cho con?
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">60.000đ</div>
-                                        <div class="cost">75.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 6 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book1.webp"
-                                            alt="mat_ngot_cho_tam_hon_tre_tho"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn trẻ thơ</div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">128.000đ</div>
-                                        <div class="cost">160.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 7 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book2.webp"
-                                            alt="mat_ngot_cho_tam_hon_thanh thieu nien"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Mật ngọt cho tâm hồn thanh thiếu niên
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">148.000đ</div>
-                                        <div class="cost">185.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 8 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book3.webp"
-                                            alt="mat_ngot_cho_tam_hon_phu_nu"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn phụ nữ</div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">108.000đ</div>
-                                        <div class="cost">135.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <%
+                        }
+                            %>
                         </div>
                     </div>
                 </div>
@@ -861,179 +498,33 @@
                                 />
                         </div>
                         <div class="book-book">
+                            <%
+                            for (int i=0;i<8;i++) {
+                            %>
                             <!-- book1 -->
                             <div class="book-link">
                                 <div class="book-items">
                                     <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
+                                        <div class="book-sale">-<%= f.format(books.get(i).getSale()*100) %>%</div>
                                     </div>
                                     <a href="./bookDetail" class="book-img">
                                         <img
-                                            src="./img/book1.webp"
+                                            src="<%= books.get(i).getImg() %>"
                                             alt="mat_ngot_cho_tam_hon_tre_tho"
                                             />
                                     </a>
                                     <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn trẻ thơ</div>
+                                        <div class="book-name"><%= books.get(i).getName() %></div>
                                     </a>
                                     <div class="book-price">
-                                        <div class="current-price">128.000đ</div>
-                                        <div class="cost">160.000đ</div>
+                                        <div class="current-price"><%= f.format(books.get(i).getPrice() -books.get(i).getSale()*books.get(i).getPrice()) %>đ</div>
+                                        <div class="cost"><%= f.format(books.get(i).getPrice()) %>đ</div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- book2 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book2.webp"
-                                            alt="mat_ngot_cho_tam_hon_thanh thieu nien"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Mật ngọt cho tâm hồn thanh thiếu niên
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">148.000đ</div>
-                                        <div class="cost">185.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 3 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book3.webp"
-                                            alt="mat_ngot_cho_tam_hon_phu_nu"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn phụ nữ</div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">108.000đ</div>
-                                        <div class="cost">135.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 4 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img src="./img/book4.webp" alt="khong_phai_loi_cua_con" />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Giáo dục giới tính - Không phải lỗi của con
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">40.000đ</div>
-                                        <div class="cost">50.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 5 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book5.webp"
-                                            alt="cha_me_lam_gi_tao_hung_thu_cho_con"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Cha mẹ làm gì để tạo hứng thú cho con?
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">60.000đ</div>
-                                        <div class="cost">75.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 6 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book1.webp"
-                                            alt="mat_ngot_cho_tam_hon_tre_tho"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn trẻ thơ</div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">128.000đ</div>
-                                        <div class="cost">160.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 7 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book2.webp"
-                                            alt="mat_ngot_cho_tam_hon_thanh thieu nien"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">
-                                            Mật ngọt cho tâm hồn thanh thiếu niên
-                                        </div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">148.000đ</div>
-                                        <div class="cost">185.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- book 8 -->
-                            <div class="book-link">
-                                <div class="book-items">
-                                    <div class="book-sale-a">
-                                        <div class="book-sale">-20%</div>
-                                    </div>
-                                    <a href="./bookDetail" class="book-img">
-                                        <img
-                                            src="./img/book3.webp"
-                                            alt="mat_ngot_cho_tam_hon_phu_nu"
-                                            />
-                                    </a>
-                                    <a href="./bookDetail" class="book-name-a">
-                                        <div class="book-name">Mật ngọt cho tâm hồn phụ nữ</div>
-                                    </a>
-                                    <div class="book-price">
-                                        <div class="current-price">108.000đ</div>
-                                        <div class="cost">135.000đ</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <%
+                            }
+                            %>
                         </div>
                     </div>
                 </div>
@@ -1164,26 +655,24 @@
                                                     <a class="auth-form__miss-t">Quên mật khẩu?</a>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="auth-form__controls">
                                                 <input type="submit" class="btn" value="Ðăng nhập"> 
                                             </div>
                                         </div>
                                     </div>
                                     <script>
-                                       const isLogin = check => {
+                                        const isLogin = check => {
                                             if (check === 0)
                                             {
-                                              alert("${requestScope.error}");
-                                              console.log("err");
+                                                alert("${requestScope.error}");
+                                                console.log("err");
+                                            } else if (check === 1) {
+                                                alert("${requestScope.success}");
+                                                console.log("success");
                                             }
-                                            
-                                            else if (check === 1) {
-                                              alert("${requestScope.success}");
-                                              console.log("success");
-                                            }
-                                       };
-                                       isLogin(${requestScope.isLogin});
+                                        };
+                                        isLogin(${requestScope.isLogin});
                                     </script>
                                 </form>
 
@@ -1234,32 +723,29 @@
                                                     </a>
                                                 </p>
                                             </div>
-                                             
+
                                             <div class="auth-form__controls">
                                                 <button class="btn">Đăng ký</button>
                                             </div>
                                         </div>
                                     </div>
-                                            
+
                                     <script>
-                                       const isRegister = check => {
+                                        const isRegister = check => {
                                             if (check === 0)
                                             {
-                                              alert("${requestScope.error}");
-                                              console.log("err");
-                                            }
-                                            
-                                            else if (check === 1) {
-                                              alert("${requestScope.success}");
-                                              console.log("success");
-                                            }
-                                            else if (check === 2){
+                                                alert("${requestScope.error}");
+                                                console.log("err");
+                                            } else if (check === 1) {
+                                                alert("${requestScope.success}");
+                                                console.log("success");
+                                            } else if (check === 2) {
                                                 alert("${requestScope.error1}");
                                                 console.log("err1");
                                             }
-                                            
-                                       };
-                                       isRegister(${requestScope.isRegister});
+
+                                        };
+                                        isRegister(${requestScope.isRegister});
                                     </script>
                                 </form>
 
@@ -1284,7 +770,7 @@
                 </div>
             </div>
         </div>
-                                                                   
+
         <script src="./main.js"></script>
     </body>
 </html>
